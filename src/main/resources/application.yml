@@ -1,0 +1,35 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+#          github:
+#            clientId: 8a747a0b241ead4ff1d3
+#            clientSecret: 5ade4be42c11603db5bfc4cb5fce259f26b7e87a
+          openemr:
+            provider: openemr
+            clientId: 3aDrndqX_3JZvLsPQTGCJz3b5Mq0olqRhlKqS16a59g
+            clientSecret: QCyr2BwSyTCwFTBPfSw7UmOK0o2xmUjfyGGBWoqRH__nbTqxJxTnwcV5qKg2O-selEnCY_4_iohsPel2HaHEkQ
+            authorization-grant-type: authorization_code
+            scope: openid, profile, offline_access, api:oemr, api:fhir, api:port, user/Patient.read
+            redirect-uri: http://localhost:8080/login/oauth2/code/openemr
+        provider:
+          openemr:
+            token-uri: https://openemr.tanzuathome.net/oauth2/default/token
+            authorization-uri: https://openemr.tanzuathome.net/oauth2/default/authorize
+            jwk-set-uri: https://openemr.tanzuathome.net/oauth2/default/jwk
+#            user-info-uri: https://openemr.tanzuathome.net/oauth2/default/userinfo
+#            user-info-authentication-method: form
+#            user-name-attribute: name
+
+# when we request the profile scope, OpenEMR will return the profile attributes in the id_token.
+# Spring will only use them if there isn't a user-info-uri configured - else it will try to call that URI
+# and the userinfo service appears to be broken in OpenEMR
+
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
