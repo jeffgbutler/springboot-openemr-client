@@ -3,9 +3,6 @@ spring:
     oauth2:
       client:
         registration:
-#          github:
-#            clientId: 8a747a0b241ead4ff1d3
-#            clientSecret: 5ade4be42c11603db5bfc4cb5fce259f26b7e87a
           openemr:
             provider: openemr
             clientId: 3aDrndqX_3JZvLsPQTGCJz3b5Mq0olqRhlKqS16a59g
@@ -19,7 +16,6 @@ spring:
             authorization-uri: https://openemr.tanzuathome.net/oauth2/default/authorize
             jwk-set-uri: https://openemr.tanzuathome.net/oauth2/default/jwk
 #            user-info-uri: https://openemr.tanzuathome.net/oauth2/default/userinfo
-#            user-info-authentication-method: form
 #            user-name-attribute: name
 
 # when we request the profile scope, OpenEMR will return the profile attributes in the id_token.
@@ -31,5 +27,5 @@ logging:
   level:
     root: INFO
     org.springframework.web: INFO
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth2: DEBUG
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO

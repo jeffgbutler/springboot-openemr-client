@@ -23,21 +23,13 @@
     <div class="container-fluid">
       <h1>OpenEMR Client</h1>
       <div id="app">
-        <div v-if="loggedIn">
-          Logged in as: {{userName}}
-          <div>
-            <button class="btn btn-primary" @click="logout">Logout</button>
-          </div>
+        Logged in as: {{userName}}
 
-          <div>
-            <button class="btn btn-primary" @click="getPatients">Get Patients</button>
-            <div id="patient-data">
-              {{patientData}}
-            </div>
+        <div id=""patients>
+          <button class="btn btn-primary" @click="getPatients">Get Patients</button>
+          <div id="patient-data">
+            {{patientData}}
           </div>
-        </div>
-        <div v-else>
-          Login with OpenEMR: <a href="/oauth2/authorization/openemr">click here</a>
         </div>
       </div>
       <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
