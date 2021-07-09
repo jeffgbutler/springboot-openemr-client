@@ -1,8 +1,6 @@
 package com.example.radiologyclient.service;
 
-import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import ca.uhn.fhir.rest.client.interceptor.BearerTokenAuthInterceptor;
 import com.example.radiologyclient.model.RadiologyPatient;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Enumerations;
@@ -16,18 +14,14 @@ import java.util.stream.Collectors;
 @Service
 public class OpenEMRService {
 
-    private final FhirContext fhirContext;
+    private final IGenericClient client;
 
-    public OpenEMRService(FhirContext fhirContext) {
-        this.fhirContext = fhirContext;
+    public OpenEMRService(IGenericClient client) {
+        this.client = client;
     }
 
-    public List<RadiologyPatient> findAllPatients(String accessToken) {
-        BearerTokenAuthInterceptor authInterceptor = new BearerTokenAuthInterceptor(accessToken);
-        IGenericClient genericClient = fhirContext.newRestfulGenericClient("https://openemr.tanzuathome.net/apis/default/fhir");
-        genericClient.registerInterceptor(authInterceptor);
-
-        Bundle results = genericClient.search().forResource(Patient.class)
+    public List<RadiologyPatient> findAllPatients() {
+        Bundle results = client.search().forResource(Patient.class)
                 .returnBundle(Bundle.class)
                 .execute();
 
