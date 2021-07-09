@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Service
@@ -101,10 +102,12 @@ public class OpenEMRService {
     }
 
     private void insertFacility(Organization organization) {
-        // add an empty NPI identifier as it is required by OpenEMR
+        // add a random NPI identifier as it is required by OpenEMR
+        long val = ThreadLocalRandom.current().nextLong(1000000000L, 9999999999L);
+
         Identifier identifier = new Identifier();
         identifier.setSystem("http://hl7.org/fhir/sid/us-npi");
-        identifier.setValue("9278590143");
+        identifier.setValue(Long.toString(val));
         organization.addIdentifier(identifier);
 
         client.create().resource(organization).prettyPrint().encodedJson().execute();
