@@ -19,6 +19,8 @@ public class FhirConfiguration {
     @Bean
     public FhirContext fhirContext() {
         FhirContext fhirContext = FhirContext.forR4();
+        // OpenEMR's capability statement is broken, so don't ever validate
+        // anything from them :)
         IRestfulClientFactory factory = fhirContext.getRestfulClientFactory();
         factory.setServerValidationMode(ServerValidationModeEnum.NEVER);
         return fhirContext;
