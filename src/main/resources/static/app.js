@@ -8,17 +8,16 @@ new Vue({
     mounted:function() {
         fetch('/user', {method: 'GET'})
             .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`Received response ${res.status}`);
-                }
                 return res.json();
             })
             .then((data) => {
-                this.loggedIn = true;
-                this.userName = data.name;
-            })
-            .catch((err) => {
-                this.loggedIn = false;
+                if (data.name === null) {
+                    this.loggedIn = false;
+                    this.userName = '';
+                } else {
+                    this.loggedIn = true;
+                    this.userName = data.name;
+                }
             });
     },
     methods: {

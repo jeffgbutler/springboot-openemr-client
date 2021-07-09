@@ -14,7 +14,9 @@ Then, navigate to /var/log/apache2 and look in access.log and error.log
 
 # OpenEMR Capabilities
 
-https://openemr.tanzuathome.net/oauth2/default/.well-known/openid-configuration
+Oauth2 Metadata: https://openemr.tanzuathome.net/oauth2/default/.well-known/openid-configuration
+
+FHIR Capabilities: https://openemr.tanzuathome.net/apis/default/fhir/metadata
 
 # Register with OpenEMR UI (Not Working)
 
