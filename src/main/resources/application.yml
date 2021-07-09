@@ -8,7 +8,7 @@ spring:
             clientId: 3aDrndqX_3JZvLsPQTGCJz3b5Mq0olqRhlKqS16a59g
             clientSecret: QCyr2BwSyTCwFTBPfSw7UmOK0o2xmUjfyGGBWoqRH__nbTqxJxTnwcV5qKg2O-selEnCY_4_iohsPel2HaHEkQ
             authorization-grant-type: authorization_code
-            scope: openid, profile, offline_access, api:oemr, api:fhir, api:port, user/Patient.read
+            scope: openid, profile, offline_access, api:oemr, api:fhir, api:port, user/Patient.read, user/Practitioner.read, user/Practitioner.write, user/Organization.read, user/Organization.write
             redirect-uri: http://localhost:8080/login/oauth2/code/openemr
         provider:
           openemr:
@@ -27,5 +27,5 @@ logging:
   level:
     root: INFO
     org.springframework.web: INFO
-    org.springframework.security: INFO
-    org.springframework.security.oauth2: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG

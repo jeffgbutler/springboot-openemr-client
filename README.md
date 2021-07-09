@@ -18,6 +18,14 @@ Oauth2 Metadata: https://openemr.tanzuathome.net/oauth2/default/.well-known/open
 
 FHIR Capabilities: https://openemr.tanzuathome.net/apis/default/fhir/metadata
 
+# Configure OpenEMR for API Access
+
+1. Login to OpenEMR here https://openemr.tanzuathome.net
+1. Navigate to Administration &gt; Globals &gt; Connectors
+1. Set site address to "https://openemr.tanzuathome.net"
+1. Enable REST and FHIR REST APIs
+1. Save
+
 # Register with OpenEMR UI (Not Working)
 
 Navigate to https://openemr.tanzuathome.net/interface/smart/register-app.php

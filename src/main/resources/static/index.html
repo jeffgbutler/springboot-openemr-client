@@ -3,34 +3,67 @@
 <head>
   <title>OpenEMR Client</title>
   <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script type="text/javascript">
-        $.ajaxSetup({
-            beforeSend : function(xhr, settings) {
-                if (settings.type == 'POST' || settings.type == 'PUT'
-                    || settings.type == 'DELETE') {
-                    if (!(/^http:.*/.test(settings.url) || /^https:.*/
-                        .test(settings.url))) {
-                        // Only send the token to relative URLs i.e. locally.
-                        xhr.setRequestHeader("X-XSRF-TOKEN",
-                            Cookies.get('XSRF-TOKEN'));
-                    }
-                }
-            }
-        });
-    </script>
   </head>
   <body>
     <div class="container-fluid">
       <h1>OpenEMR Client</h1>
       <div id="app">
-        Logged in as: {{userName}}
+        <p>Logged in as: {{userName}}</p>
 
-        <div id=""patients>
-          <button class="btn btn-primary" @click="getPatients">Get Patients</button>
-          <div id="patient-data">
-            {{patientData}}
-          </div>
+        <h2>Patients</h2>
+        <button class="btn btn-primary" @click="getPatients">Get Patients</button>
+        <button class="btn btn-primary" @click="clearPatients">Clear Patient Table</button>
+        <div v-if="patientData.length > 0">
+          <table class="table table-striped">
+            <thead class="thead-light">
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="patient in patientData">
+                <td>{{patient.id}}</td>
+                <td>{{patient.firstName}}</td>
+                <td>{{patient.lastName}}</td>
+                <td>{{patient.gender}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <h2>Practitioners</h2>
+        <form enctype="multipart/form-data" action="/practitioner" method="post">
+          <input type="file" name="file">
+          <input type="submit">
+        </form>
+
+        <h2>Facilities</h2>
+        <button class="btn btn-primary" @click="getFacilities">Get Facilities</button>
+        <button class="btn btn-primary" @click="clearFacilities">Clear Facility Table</button>
+        <div v-if="facilityData.length > 0">
+          <table class="table table-striped">
+            <thead class="thead-light">
+            <tr>
+              <th>ID</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="facility in facilityData">
+              <td>{{facility.id}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <br/>
+        <form enctype="multipart/form-data" action="/facility" method="post">
+          Upload facilities
+          <input type="file" name="file">
+          <input type="submit">
+        </form>
+
       </div>
       <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
       <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>

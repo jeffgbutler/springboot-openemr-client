@@ -15,6 +15,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/openemr_login.html", "/webjars/**").permitAll()
                     .anyRequest().authenticated()
             )
+            .csrf().disable()
 //            .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
 //            .csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
 //            .logout(l -> l.logoutSuccessUrl("/").permitAll())

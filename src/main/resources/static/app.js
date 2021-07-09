@@ -3,9 +3,10 @@ new Vue({
     data: {
         loggedIn: false,
         userName: '',
-        patientData: ''
+        patientData: [],
+        facilityData: []
     },
-    mounted:function() {
+    mounted: function() {
         fetch('/user', {method: 'GET'})
             .then((res) => {
                 return res.json();
@@ -40,11 +41,32 @@ new Vue({
                     return res.json();
                 })
                 .then((data) => {
-                    this.patientData = JSON.stringify(data);
+                    this.patientData = data;
                 })
                 .catch((err) => {
                     this.patientData = err;
                 });
+        },
+        clearPatients() {
+            this.patientData = [];
+        },
+        getFacilities() {
+            fetch('/facility', {method: 'GET'})
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error(`Received facility response ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    this.facilityData = data;
+                })
+                .catch((err) => {
+                    this.facilityData = err;
+                });
+        },
+        clearFacilities() {
+            this.facilityData = [];
         }
     }
 });
